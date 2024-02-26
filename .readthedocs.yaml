@@ -1,0 +1,14 @@
+version: "0"
+
+build:
+  os: "Windows 11"
+  tools:
+    splunk: "9.2.0.1"
+    python: "3.10"
+
+python:
+  install:
+    - requirements: docs/requirements.txt
+
+sphinx:
+  configuration: docs/source/conf.py
