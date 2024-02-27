@@ -36,14 +36,16 @@ For the assignment, we'll have to write a script to use the APIs to pull the dem
 
 For an example of this, please check `pull_raw_events.py`. Do note that I have not uploaded it to GitHub as I have yet to implement the secret service and uploading the file will result in the leak of the API token.
 
+The body of the response is formatted such that if decoded with `utf-8`, you will receive a ready-to-ingest .csv file.
+
 ## 1.4 Data Ingestion
 
-To do that, navigate to the `RF App`, then `Settings > Add Data`  
+To ingest data, navigate to the `RF App`, then `Settings > Add Data`  
 [Alternatively click here to go directly to the add data page.](http://127.0.0.1:8000/en-GB/manager/TA-recordedfuture/adddata)
 
-Once there, use `Monitor` so that it updates real time without you having to reupload all the time.
+Once there, use `Monitor` and follow the instructions to designate a folder such that it updates near real-time without you having to constantly reupload.
 
-Alternatively, just upload the files if you'd prefer it manually.
+Alternatively, if you would like more manual control just upload the files directly.
 
 # 2. RFProject Usage
 
@@ -59,10 +61,6 @@ For the sake of this assignment, we will don the hat of an Intel Analyst.
 
 Specifically, the kind that works for a company that has contracted RF's services.  
 They will want to know at a glance if the intel given is pertinent to their company.
-
-
-
-Correlation. Affected Versions, IOCs, Devices.
 
 # TO-DO
 
