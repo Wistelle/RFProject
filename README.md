@@ -1,3 +1,16 @@
+# 0. Progress
+
+|Item|Progress(%)|Status|
+|-|-|-|
+|Splunk Setup|100|Complete|
+|RF App Setup|100|Complete|
+|Pulling Data from API|80|In-Progress|
+|Cleaning Data for Splunk Ingestion|10|Planning|
+|Field Extraction for Ingested Data|10|Planning|
+|Correlations|10|Planning|
+|Dashboard Modifications|0|Waiting
+|Risk review|0|Waiting
+
 # 1. RFProject Installation & Set Up
 
 ## 1.0 Requirements
