@@ -34,24 +34,42 @@ Play around with what they have to offer and how the data, the arguments, as wel
 
 For the assignment, we'll have to write a script to use the APIs to pull the demo data.
 
-For an example of this, please check `pull_raw_events.py`. Do note that I have not uploaded it to GitHub as I have yet to implement the secret service and uploading the file will result in the leak of the API token.
+For an example of this, please check `pull_raw_events.py`.
 
-The body of the response is formatted such that if decoded with `utf-8`, you will receive a ready-to-ingest .csv file.
+```
+Do note that I have not uploaded it to GitHub as I have yet to implement the secret service and uploading the file will result in the leak of the API token.
+```
 
-## 1.4 Data Ingestion
+## 1.4 (DRAFT) Data Cleaning
+
+All 4 of the APIs return data a little differently than each other.
+
+
+
+## 1.5 Data Ingestion
 
 To ingest data, navigate to the `RF App`, then `Settings > Add Data`  
 [Alternatively click here to go directly to the add data page.](http://127.0.0.1:8000/en-GB/manager/TA-recordedfuture/adddata)
 
-Once there, use `Monitor` and follow the instructions to designate a folder such that it updates near real-time without you having to constantly reupload.
+I suggest manually uploading and cleaning the files until such a time when data is verified to be properly ingested with the fields extracted properly.
 
-Alternatively, if you would like more manual control just upload the files directly.
+If ever you need a fresh clean slate to start over, please refer to 
+[Managing Indexers and Clusters of Indexers](https://docs.splunk.com/Documentation/Splunk/7.0.1/Indexer/RemovedatafromSplunk#How_to_use_the_clean_command)
+
+Once ready, Navigate to `Data Input` and set up a `Monitor`. Follow the instructions to designate a folder such that it updates near real-time without you having to constantly reupload.
 
 # 2. RFProject Usage
-
-
+??
 
 # 3. RFProject Customization
+
+## 3.0 How Splunk Charges
+
+Splunk charges the users by how much data is ingested into their system. The more data you ingest, the more you are charged.
+
+To make things more efficient for Searching, as well as cost reduction to the client, it is imperative we trim the data down to only information that we need.
+
+The art of this is balancing what we prune; Too much, and we lose contextual clues. Too little, and we're ingesting data we have no use for resulting in higher costs. A field or two wouldn't add much in the long run, but ingesting data you're never going to use would slow Searches.
 
 ## 3.1 Data Pruning
 
@@ -61,6 +79,20 @@ For the sake of this assignment, we will don the hat of an Intel Analyst.
 
 Specifically, the kind that works for a company that has contracted RF's services.  
 They will want to know at a glance if the intel given is pertinent to their company.
+
+## 3.2 (DRAFT) Correlations
+
+Correlations are similar to alerts in that they are generated when the events are matched with intellgence (correlated).  
+
+The key difference with alerts is the urgency; Alerts would trigger known threats that have been detected via splunk to an event.
+
+Correlations are *potential* threats that an analyst has to look through to determine if the threats are valid.
+To that end it is possible for more indormation to be correlated to give more context regarding the threat to allow for a more informed decision
+
+### IP
+
+Correlation for IP is easy: Simply match them.
+A match would mean an IP is correlated
 
 # TO-DO
 
