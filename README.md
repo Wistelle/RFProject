@@ -1,3 +1,16 @@
+# 0. Progress
+
+|Item|Progress(%)|Status|
+|-|-|-|
+|Splunk Setup|100|Complete|
+|RF App Setup|100|Complete|
+|Pulling Data from API|80|In-Progress|
+|Cleaning Data for Splunk Ingestion|10|Planning|
+|Field Extraction for Ingested Data|10|Planning|
+|Correlations|10|Planning|
+|Dashboard Modifications|0|Waiting|
+|Risk review|0|Waiting|
+
 # 1. RFProject Installation & Set Up
 
 ## 1.0 Requirements
@@ -36,15 +49,19 @@ For the assignment, we'll have to write a script to use the APIs to pull the dem
 
 For an example of this, please check `pull_raw_events.py`.
 
-```
-Do note that I have not uploaded it to GitHub as I have yet to implement the secret service and uploading the file will result in the leak of the API token.
-```
-
 ## 1.4 (DRAFT) Data Cleaning
 
 All 4 of the APIs return data a little differently than each other.
+All of them need to be cleaned and the fields extracted in order to be fed into Splunk.  
 
-
+### IP
+For each line in the reply, extract the time, service policy, src IP and dst IP. This should give us some easy correlations to C2 connections.
+### Hash
+The output is very similar to CSV already; Check if splunk has a way to get headers from fields and delimit on colon.
+### Domain
+For each line, extract: Time, IP, protocol, HTTP Method, Domain and Application
+### Vulnerabilities
+For each line extract: Time, Name, CVSS Vector, Hostname, Description, First-Seen, CVE Details
 
 ## 1.5 Data Ingestion
 
@@ -58,8 +75,9 @@ If ever you need a fresh clean slate to start over, please refer to
 
 Once ready, Navigate to `Data Input` and set up a `Monitor`. Follow the instructions to designate a folder such that it updates near real-time without you having to constantly reupload.
 
-# 2. RFProject Usage
-??
+# 2. (Draft) RFProject Usage
+
+> Document the use case of the dashboard for the day to day user here.
 
 # 3. RFProject Customization
 
@@ -71,7 +89,7 @@ To make things more efficient for Searching, as well as cost reduction to the cl
 
 The art of this is balancing what we prune; Too much, and we lose contextual clues. Too little, and we're ingesting data we have no use for resulting in higher costs. A field or two wouldn't add much in the long run, but ingesting data you're never going to use would slow Searches.
 
-## 3.1 Data Pruning
+## 3.1 (Draft) Data Pruning
 
 Before we start pruning, take some time to figure out what is important, not just to you as a developer, but as a consumer. Threat Intelligence would have wants and needs different to an Intrusion Analyst.
 
@@ -80,29 +98,15 @@ For the sake of this assignment, we will don the hat of an Intel Analyst.
 Specifically, the kind that works for a company that has contracted RF's services.  
 They will want to know at a glance if the intel given is pertinent to their company.
 
+> Which parts need to be pruned, from IP/Hash/Domains/Vulns
+
 ## 3.2 (DRAFT) Correlations
 
 Correlations are similar to alerts in that they are generated when the events are matched with intellgence (correlated).  
 
-The key difference with alerts is the urgency; Alerts would trigger known threats that have been detected via splunk to an event.
+From the documentation of the Recorded Future App:
+> "Correlations detect malicious events with a low rate of false positives. Dedicated correlation views help shorten the time spent on event triage."
 
-Correlations are *potential* threats that an analyst has to look through to determine if the threats are valid.
-To that end it is possible for more indormation to be correlated to give more context regarding the threat to allow for a more informed decision
+### Basic Correlations
 
-### IP
-
-Correlation for IP is easy: Simply match them.
-A match would mean an IP is correlated
-
-# TO-DO
-
-## ?. Secret Service
-
-Implement Secret Service such that the .py files can be uploaded without exposing the API token.
-
-## ?. Read the  Docs
-~~Primarily will be used for Read the Docs.~~
-
-~~[http://rfproject.readthedocs.io/](http://rfproject.readthedocs.io/)~~
-
-Maybe no RTD until the project is done.
+IPs, Hashes, Domains and Vulnerabilities can be easily correlated 1-1 to the existing RF tables.
