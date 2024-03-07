@@ -109,4 +109,4 @@ From the documentation of the Recorded Future App:
 
 ### Basic Correlations
 
-IPs, Hashes, Domains and Vulnerabilities can be easily correlated 1-1 to the existing RF tables.
+IPs, Hashes, Domains and Vulnerabilities can be easily correlated 1-1 to the existing RF tables
